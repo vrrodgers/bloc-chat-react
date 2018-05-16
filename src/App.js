@@ -24,25 +24,44 @@ class App extends Component {
 
     this.state = {
       activeRoom: "",
-      activeRoomKey: ""
+      activeRoomKey: "",
     };
+
   }
 
-   
+     ActiveRoom(room){
+       this.setState({activeRoom: room });
+       this.setState({ activeRoomKey: room.key });
+       console.log(room);
+     }
 
   render() {
-    let roomlist;
-    return <div className="App sidenav">
+    //  let roomlist;
+
+    return (
+    
+    <div className="App sidenav">
         <header>
           <h1 className="sidenavtext">Bloc Chat</h1>
         </header>
-        <aside className="sidenavtext">
-          <RoomList firebase={firebase} />
-        </aside>
-        <main />
-      </div>;  
-  }
+          <aside className="sidenavtext">
+            <RoomList firebase={firebase}
+              activeRoom={this.activeRoom} />
+          </aside>
+          <div>
+            <h2>{this.state.activeRoom.name}</h2>
 
+          </div>
+        
+
+
+    </div>
+        
+
+
+  );
+  }
+      
 }
 
 
