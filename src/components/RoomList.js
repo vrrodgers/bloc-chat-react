@@ -6,11 +6,11 @@ class RoomList extends Component {
 
     this.state = {
       rooms: [],
-      newRoomName: ''
+      newRoomName: ""
     };
-
     this.roomsRef = this.props.firebase.database().ref("rooms");
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   componentDidMount() {
@@ -22,44 +22,75 @@ class RoomList extends Component {
     });
   }
 
-  
-
   handleSubmit(e) {
     e.preventDefault();
     this.props.firebase.database().ref("rooms");
-    const roomsRef = firebase.database().ref('rooms');
+    const roomsRef = firebase.database().ref("rooms");
     const room = {
       name: this.state.newRoomName
     };
     roomsRef.push(room);
     this.setState({
-      newRoomName: ''
+      newRoomName: ""
     });
+
+      this.state.newChatRoom = ''
+    
   }
 
   handleChange(e) {
     this.setState({ newRoomName: e.target.value });
   }
+
+  handleDelete(e) {
+    for (var i = 0; i < this.state.rooms.length; i++) {
+      if (this.state.rooms[i] == e) {
+        delete this.state.rooms[i];
+      }
+    }
+    this.setState({ rooms: this.state.room });
+    console.log(this.state.room);
+  }
   selectRoom(room) {
     this.props.activeRoom(room);
   }
   render() {
-    return <div className="roomlist">
+
+    return (
+      <div className="roomlist">
         <ul>
           {this.state.rooms.map((room, index) => {
-            return <div className="room" key={index} onClick={e => this.selectRoom(room, e)}>
+            return (
+              <div
+                className="room"
+                key={index}
+                onClick={e => this.selectRoom(room, e)}
+              >
                 {room.name}
-              </div>;
+              </div>
+            );
           })}
         </ul>
         <form onSubmit={e => this.handleSubmit(e)}>
-          <input type="text" value={this.state.newChatRoom} onChange={e => this.handleChange(e)} placeholder=" New Room" />
+          <input
+            type="text"
+            value={this.state.newChatRoom}
+            onChange={e => this.handleChange(e)}
+            placeholder=" New Room"
+          />
 
           <input type="submit" value="Create Room" />
+          
+                       
+                   
+     
         </form>
-      </div>;
+      </div>
+    );
   }
 }
+  
+
   
 
 

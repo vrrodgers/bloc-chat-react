@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import * as firebase from "firebase";
 import RoomList from './components/RoomList';
+import MessageList from './components/MessageList';
 import "./App.css";
 
 
@@ -50,7 +51,10 @@ class App extends Component {
           </aside>
           <div>
             <h2>{this.state.activeRoom.name}</h2>
-
+            <main>
+              <MessageList firebase={firebase}
+                  activeRoomKey={this.state.activeRoomKey}/>
+             </main>
           </div>
         
 
