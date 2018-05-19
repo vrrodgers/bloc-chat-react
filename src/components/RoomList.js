@@ -1,5 +1,18 @@
 import React, { Component } from "react";
 import * as firebase from "firebase";
+import {
+  Col,
+  FormGroup,
+  InputGroup,
+  FormControl,
+  Button
+} from "react-bootstrap";
+
+
+
+
+
+
 class RoomList extends Component {
   constructor(props) {
     super(props);
@@ -8,6 +21,7 @@ class RoomList extends Component {
       rooms: [],
       newRoomName: ""
     };
+
     this.roomsRef = this.props.firebase.database().ref("rooms");
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
@@ -21,6 +35,7 @@ class RoomList extends Component {
       this.setState({ rooms: this.state.rooms.concat(room) });
     });
   }
+  
 
   handleSubmit(e) {
     e.preventDefault();
@@ -33,9 +48,7 @@ class RoomList extends Component {
     this.setState({
       newRoomName: ""
     });
-
-      this.state.newChatRoom = ''
-    
+      this.state.newChatRoom = "";
   }
 
   handleChange(e) {
@@ -44,7 +57,7 @@ class RoomList extends Component {
 
   handleDelete(e) {
     for (var i = 0; i < this.state.rooms.length; i++) {
-      if (this.state.rooms[i] == e) {
+      if (this.state.rooms[i] === e) {
         delete this.state.rooms[i];
       }
     }
@@ -55,22 +68,17 @@ class RoomList extends Component {
     this.props.activeRoom(room);
   }
   render() {
-
     return (
       <div className="roomlist">
-        <ul>
           {this.state.rooms.map((room, index) => {
-            return (
-              <div
-                className="room"
-                key={index}
+            return <div
+                className="room" key={index}
                 onClick={e => this.selectRoom(room, e)}
-              >
+                >
                 {room.name}
               </div>
-            );
+              ;
           })}
-        </ul>
         <form onSubmit={e => this.handleSubmit(e)}>
           <input
             type="text"
@@ -79,11 +87,7 @@ class RoomList extends Component {
             placeholder=" New Room"
           />
 
-          <input type="submit" value="Create Room" />
-          
-                       
-                   
-     
+          <Button type="submit" >Create Room</Button>
         </form>
       </div>
     );

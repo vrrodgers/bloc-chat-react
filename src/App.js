@@ -3,6 +3,8 @@ import * as firebase from "firebase";
 import RoomList from './components/RoomList';
 import MessageList from './components/MessageList';
 import "./App.css";
+import * as ReactBootstrap from "react-bootstrap";
+
 
 
 
@@ -27,12 +29,16 @@ class App extends Component {
       activeRoom: "",
       activeRoomKey: "",
     };
-
+    //  this.activeRoom = this.activeRoom.bind(this);
   }
 
      ActiveRoom(room){
        this.setState({activeRoom: room });
        this.setState({ activeRoomKey: room.key });
+       /* const roomKey = room === "" ? "" : room.key;
+       const roomTitle = room === "" ? "" : room.title; */
+      //  userRef.update({currentRoom: roomKey, roomName: roomTitle});
+
        console.log(room);
      }
 
@@ -40,30 +46,27 @@ class App extends Component {
     //  let roomlist;
 
     return (
-    
-    <div className="App sidenav">
-        <header>
-          <h1 className="sidenavtext">Bloc Chat</h1>
-        </header>
+      <div className="App">
+        <div className="sidenav">
+          <header>
+            <h1 className="sidenavtext">Bloc Chat</h1>
+          </header>
           <aside className="sidenavtext">
-            <RoomList firebase={firebase}
-              activeRoom={this.activeRoom} />
+            <RoomList firebase={firebase} activeRoom={this.activeRoom} />
           </aside>
-          <div>
+        </div>
+
+        <div className="content">
+          <div className="content">
             <h2>{this.state.activeRoom.name}</h2>
-            <main>
-              <MessageList firebase={firebase}
-                  activeRoomKey={this.state.activeRoomKey}/>
-             </main>
+
+            <div className="messagelist">
+              <MessageList firebase={firebase} activeRoomKey={this.state.activeRoom.content} />
+            </div>
           </div>
-        
-
-
-    </div>
-        
-
-
-  );
+        </div>
+      </div>
+    );
   }
       
 }
