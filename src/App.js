@@ -27,22 +27,27 @@ class App extends Component {
 
     this.state = {
       activeRoom: "",
-      activeRoomKey: "",
-      
+      activeRoomKey: ""
     };
-     //this.activeRoom = this.activeRoom.bind(this);
+    //this.activeRoom = this.activeRoom.bind(this);
   }
 
-     ActiveRoom(room){
-       this.setState({activeRoom: room });
-       this.setState({ activeRoomKey: room.key });
-       const roomKey = room === "" ? "" : room.key;
-       const roomTitle = room === "" ? "" : room.title;
-      //  userRef.update({currentRoom: roomKey, roomName: roomTitle});
-        console.log("ActiveRoom", room);
+  ActiveRoom(room) {
+    this.setState({ activeRoom: room });
+    this.setState({ activeRoomKey: room.key });
+    const roomKey = room === "" ? "" : room.key;
+    const roomTitle = room === "" ? "" : room.title;
+    //  userRef.update({currentRoom: roomKey, roomName: roomTitle});
+    console.log("ActiveRoom", room);
 
-      //  console.log(room);
-     }
+    //  console.log(room);
+  }
+
+  selectRoom(room) {
+    this.setState({
+      activeRoomKey: room
+    });
+  }
 
   render() {
     //  let roomlist;
@@ -53,7 +58,9 @@ class App extends Component {
             <h1 className="sidenavtext">Bloc Chat</h1>
           </header>
           <aside className="sidenavtext">
-            <RoomList firebase={firebase} activeRoom={this.activeRoom} />
+            <RoomList firebase={firebase} 
+            activeRoom={this.state.activeRoom} 
+            selectRoom={this.selectRoom.bind(this)} />
           </aside>
         </div>
 
@@ -62,14 +69,14 @@ class App extends Component {
             <h2>{this.state.activeRoom.name}</h2>
 
             <div className="messagelist">
-              <MessageList firebase={firebase} 
-                activeRoom={this.state.activeRoom.key} />
+             <MessageList firebase={firebase} 
+             activeRoom={this.state.activeRoom} 
+             activeRoomKey={this.state.activeRoomKey}  />
             </div>
           </div>
         </div>
       </div>;
   }
-      
 }
 
 

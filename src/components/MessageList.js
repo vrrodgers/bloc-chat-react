@@ -67,7 +67,7 @@ class MessageList extends Component {
   }
 
   render() {
-    let activeRoomKey = this.state.activeRoomKey;
+    let activeRoomKey = this.props.activeRoomKey;
     console.log(this.props);
 
     return (
@@ -76,12 +76,12 @@ class MessageList extends Component {
           if (activeRoomKey === "") {
             return null;
           } else if (message.roomId === activeRoomKey) {
-            return (
-            <div className="message" key={index}>
-                {message.username}:
-                {message.content}
+            return <div className="message" key={index}>
+                <div>
+                  {message.username}
+                  {message.content}
+                </div>
               </div>
-            );
           }
         })}
         <div className="MessageForm">

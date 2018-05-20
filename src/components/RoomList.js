@@ -19,8 +19,7 @@ class RoomList extends Component {
 
     this.state = {
       rooms: [],
-      newRoomName: "",
-      activeRoomKey: ""
+      newRoomName: ""
     };
 
     this.roomsRef = this.props.firebase.database().ref("rooms");
@@ -36,7 +35,7 @@ class RoomList extends Component {
       this.setState({ rooms: this.state.rooms.concat(room) });
     });
   }
-  
+
 
   handleSubmit(e) {
     e.preventDefault();
@@ -49,7 +48,7 @@ class RoomList extends Component {
     this.setState({
       newRoomName: ""
     });
-      this.state.newChatRoom = "";
+    this.State.newChatRoom = " ";
   }
 
   handleChange(e) {
@@ -65,21 +64,24 @@ class RoomList extends Component {
     this.setState({ rooms: this.state.room });
     console.log(this.state.room);
   }
-  selectRoom(room) {
-    this.setState({
-        activeRoomKey: room
-    })
-  }
+ /*  selectRoom(room) {
+    this.props.activeRoom(room);
+  } */
   render() {
     return (
-      <div className="roomlist">
-          {this.state.rooms.map((room, index) => {
-            return <div className="room" key={index} onClick={e => this.selectRoom(room.key)}>
+      <div className="roomlist">       
+      
+        
+      {this.state.rooms.map((room, index) => {
+            return <div
+                className="room" key={index}
+                onClick={e => this.props.selectRoom(room.key)}
+                >
                 {room.name}
               </div>
               ;
-          })}
-        <form onSubmit={e => this.handleSubmit(e)}>
+          })}      
+          <form onSubmit={e => this.handleSubmit(e)}>
           <input
             type="text"
             value={this.state.newChatRoom}
@@ -88,15 +90,14 @@ class RoomList extends Component {
           />
 
           <Button type="submit" >Create Room</Button>
-           <h5>current room # {this.state.activeRoomKey}</h5>
         </form>
       </div>
     );
   }
 }
-  
 
-  
+
+
 
 
 
