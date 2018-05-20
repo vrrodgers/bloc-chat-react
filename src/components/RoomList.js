@@ -82,7 +82,7 @@ class RoomList extends Component {
             </Button>
           </FormGroup>
         </form>
-      </div>;
+      </div>
   }
 }
 
