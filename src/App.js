@@ -28,25 +28,26 @@ class App extends Component {
     this.state = {
       activeRoom: "",
       activeRoomKey: "",
+      
     };
-    //  this.activeRoom = this.activeRoom.bind(this);
+     //this.activeRoom = this.activeRoom.bind(this);
   }
 
      ActiveRoom(room){
        this.setState({activeRoom: room });
        this.setState({ activeRoomKey: room.key });
-       /* const roomKey = room === "" ? "" : room.key;
-       const roomTitle = room === "" ? "" : room.title; */
+       const roomKey = room === "" ? "" : room.key;
+       const roomTitle = room === "" ? "" : room.title;
       //  userRef.update({currentRoom: roomKey, roomName: roomTitle});
+        console.log("ActiveRoom", room);
 
-       console.log(room);
+      //  console.log(room);
      }
 
   render() {
     //  let roomlist;
-
-    return (
-      <div className="App">
+    //console.log(this.state.activeRoomKey);
+    return <div className="App">
         <div className="sidenav">
           <header>
             <h1 className="sidenavtext">Bloc Chat</h1>
@@ -61,12 +62,12 @@ class App extends Component {
             <h2>{this.state.activeRoom.name}</h2>
 
             <div className="messagelist">
-              <MessageList firebase={firebase} activeRoomKey={this.state.activeRoom.content} />
+              <MessageList firebase={firebase} 
+                activeRoom={this.state.activeRoom.key} />
             </div>
           </div>
         </div>
-      </div>
-    );
+      </div>;
   }
       
 }
