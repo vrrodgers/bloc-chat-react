@@ -4,6 +4,16 @@ import RoomList from './components/RoomList';
 import MessageList from './components/MessageList';
 import "./App.css";
 import * as ReactBootstrap from "react-bootstrap";
+import {
+  Col,
+  Row,
+  Grid,
+  FormGroup,
+  InputGroup,
+  FormControl,
+  Button
+} from "react-bootstrap";
+
 
 
 
@@ -52,30 +62,32 @@ class App extends Component {
   render() {
     //  let roomlist;
     //console.log(this.state.activeRoomKey);
-    return <div className="App">
-        <div className="sidenav">
-          <header>
-            <h1 className="sidenavtext">Bloc Chat</h1>
-          </header>
-          <aside className="sidenavtext">
-            <RoomList firebase={firebase} 
-            activeRoom={this.state.activeRoom} 
-            selectRoom={this.selectRoom.bind(this)} />
-          </aside>
-        </div>
-
-        <div className="content">
-          <div className="content">
-            <h2>{this.state.activeRoom.name}</h2>
-
-            <div className="messagelist">
-             <MessageList firebase={firebase} 
-             activeRoom={this.state.activeRoom} 
-             activeRoomKey={this.state.activeRoomKey}  />
-            </div>
+    return <Grid>
+        <Row className="App show-grid">
+          <div className="sidenav">
+            <header>
+              <h1 className="sidenavtext">Bloc Chat</h1>
+            </header>
+            <Col md={4}>
+              <aside className="sidenavtext">
+                <RoomList firebase={firebase} activeRoom={this.state.activeRoom} selectRoom={this.selectRoom.bind(this)} />
+              </aside>
+            </Col>
           </div>
-        </div>
-      </div>;
+          <Col md={1}> </Col>
+          <Col md={7}>
+            <div className="content">
+              <div className="content">
+                <h2>{this.state.activeRoom.name}</h2>
+
+                <div className="messagelist">
+                  <MessageList firebase={firebase} activeRoom={this.state.activeRoom} activeRoomKey={this.state.activeRoomKey} />
+                </div>
+              </div>
+            </div>
+          </Col>
+        </Row>
+      </Grid>;
   }
 }
 

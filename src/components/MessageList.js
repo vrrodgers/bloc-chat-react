@@ -47,9 +47,9 @@ class MessageList extends Component {
     const messagesRef = firebase.database().ref("messages");
     const message = {
       content: this.state.content,
-      username: "kelly ",
+      username: "Guess-user ",
       sentAt: datetime ,
-      roomId: "-LC_VNQnUP4ZC81UIdm2" //add current roomid
+      roomId: "1" //add current roomid
     };
     //to add to database
     messagesRef.push(message);
@@ -70,28 +70,31 @@ class MessageList extends Component {
     let activeRoomKey = this.props.activeRoomKey;
     console.log(this.props);
 
-    return (
-      <div>
+    return <div>
         {this.state.messages.map((message, index) => {
           if (activeRoomKey === "") {
             return null;
           } else if (message.roomId === activeRoomKey) {
             return <div className="message" key={index}>
-                <div>
+                <p>
                   {message.username}
                   {message.content}
-                </div>
-              </div>
+                </p>
+              </div>;
           }
         })}
+
         <div className="MessageForm">
           <form onSubmit={e => this.handleSubmit(e)}>
-            <input type="text" value={this.state.content} onChange={e => this.handleChange(e)} placeholder=" New Room" />
-            <Button type="submit">Send Message</Button>
+            <FormGroup>
+              <FormControl className="form form-control-message" type="text" value={this.state.content} onChange={e => this.handleChange(e)} placeholder=" Enter Message" />
+              <Button bsStyle="primary"  className="form" type="submit">
+                Send Message
+              </Button>
+            </FormGroup>
           </form>
         </div>
-      </div>
-    );
+      </div>;
   }
 }
 

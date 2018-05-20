@@ -48,7 +48,7 @@ class RoomList extends Component {
     this.setState({
       newRoomName: ""
     });
-    this.State.newChatRoom = " ";
+    this.state.newChatRoom = " "
   }
 
   handleChange(e) {
@@ -68,31 +68,21 @@ class RoomList extends Component {
     this.props.activeRoom(room);
   } */
   render() {
-    return (
-      <div className="roomlist">       
-      
-        
-      {this.state.rooms.map((room, index) => {
-            return <div
-                className="room" key={index}
-                onClick={e => this.props.selectRoom(room.key)}
-                >
-                {room.name}
-              </div>
-              ;
-          })}      
-          <form onSubmit={e => this.handleSubmit(e)}>
-          <input
-            type="text"
-            value={this.state.newChatRoom}
-            onChange={e => this.handleChange(e)}
-            placeholder=" New Room"
-          />
-
-          <Button type="submit" >Create Room</Button>
+    return <div className="roomlist">
+        {this.state.rooms.map((room, index) => {
+          return <div className="room" key={index} onClick={e => this.props.selectRoom(room.key)}>
+              {room.name}
+            </div>
+        })}
+        <form onSubmit={e => this.handleSubmit(e)}>
+          <FormGroup>
+            <FormControl className="form-control-room" type="text" value={this.state.newChatRoom} onChange={e => this.handleChange(e)} placeholder=" New Room" />
+            <Button bsStyle="primary" type="submit">
+              Create Room
+            </Button>
+          </FormGroup>
         </form>
-      </div>
-    );
+      </div>;
   }
 }
 
