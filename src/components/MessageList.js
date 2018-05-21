@@ -49,7 +49,7 @@ class MessageList extends Component {
       content: this.state.content,
       username: "Guess-user ",
       sentAt: datetime ,
-      roomId: "1" //add current roomid
+      roomId: this.props.activeRoomKey //add current room_id
     };
     //to add to database
     messagesRef.push(message);
@@ -68,9 +68,8 @@ class MessageList extends Component {
 
   render() {
     let activeRoomKey = this.props.activeRoomKey;
-    console.log(this.props);
-
-    return <div>
+    return (
+      <div>
         {this.state.messages.map((message, index) => {
           if (activeRoomKey === "") {
             return null;
@@ -88,14 +87,14 @@ class MessageList extends Component {
           <form onSubmit={e => this.handleSubmit(e)}>
             <FormGroup>
               <FormControl className="form form-control-message" type="text" value={this.state.content} onChange={e => this.handleChange(e)} placeholder=" Enter Message" />
-              <Button bsStyle="primary"  className="form" type="submit">
-                Send Message
+              <Button bsStyle="primary" className="form" type="submit">
+                 Send Message
               </Button>
             </FormGroup>
           </form>
         </div>
-      </div>;
-  }
+      </div>
+    )}
 }
 
 
