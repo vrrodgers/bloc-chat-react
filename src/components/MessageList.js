@@ -47,7 +47,7 @@ class MessageList extends Component {
     const messagesRef = firebase.database().ref("messages");
     const message = {
       content: this.state.content,
-      username: "Guess-user ",
+      username: this.props.username,
       sentAt: datetime ,
       roomId: this.props.activeRoomKey //add current room_id
     };
@@ -75,8 +75,10 @@ class MessageList extends Component {
             return null;
           } else if (message.roomId === activeRoomKey) {
             return <div className="message" key={index}>
-                <p>
-                  {message.username}
+                <p className="messageUserName">
+                  {message.username}:
+                  </p>
+                  <p className="messagecontent">   
                   {message.content}
                 </p>
               </div>;

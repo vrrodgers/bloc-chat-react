@@ -49,12 +49,7 @@ class App extends Component {
     this.setState({ activeRoomKey: room.key });
     const roomKey = room === "" ? "" : room.key;
     const roomTitle = room === "" ? "" : room.title;
-   // userRef.update({currentRoom: roomKey, roomName: roomTitle});
-    //console.log("ActiveRoom", room);
-    /* const roomKey = room === "" ? "" : room.key;
-    const roomTitle = room === "" ? "" : room.title; */
-    //userRef.update({ currentRoom: roomKey, roomName: roomTitle });
-    //  console.log(room);
+   
   }
 
   selectRoom(room) {
@@ -97,7 +92,7 @@ class App extends Component {
                 <h2>{this.state.activeRoom.name}</h2>
 
                 <div className="messagelist">
-                  <MessageList firebase={firebase} activeRoom={this.state.activeRoom} activeRoomKey={this.state.activeRoomKey} />
+                  <MessageList firebase={firebase} activeRoom={this.state.activeRoom} username={this.state.username}  activeRoomKey={this.state.activeRoomKey} />
                 </div>
               </div>
             </div>
