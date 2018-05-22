@@ -3,6 +3,7 @@ import * as firebase from "firebase";
 import RoomList from './components/RoomList';
 import MessageList from './components/MessageList';
 import "./App.css";
+import User from './components/User'
 import * as ReactBootstrap from "react-bootstrap";
 import {
   Col,
@@ -40,6 +41,7 @@ class App extends Component {
       activeRoomKey: ""
     };
     //this.activeRoom = this.activeRoom.bind(this);
+    this.setUser = this.setUser.bind(this);
   }
 
   ActiveRoom(room) {
@@ -47,9 +49,11 @@ class App extends Component {
     this.setState({ activeRoomKey: room.key });
     const roomKey = room === "" ? "" : room.key;
     const roomTitle = room === "" ? "" : room.title;
-    //  userRef.update({currentRoom: roomKey, roomName: roomTitle});
-    console.log("ActiveRoom", room);
-
+   // userRef.update({currentRoom: roomKey, roomName: roomTitle});
+    //console.log("ActiveRoom", room);
+    /* const roomKey = room === "" ? "" : room.key;
+    const roomTitle = room === "" ? "" : room.title; */
+    //userRef.update({ currentRoom: roomKey, roomName: roomTitle });
     //  console.log(room);
   }
 
@@ -58,15 +62,27 @@ class App extends Component {
       activeRoomKey: room
     });
   }
+  
+   setUser(user){
+      if (user === null) {
+        return this.setState({ username: 'Guest' });
+      } else {
+        return this.setState({ username: user.displayName });
+      }
+    }
+
+
 
   render() {
-    //  let roomlist;
+   
     //console.log(this.state.activeRoomKey);
+
     return <Grid>
         <Row className="App show-grid">
           <div className="sidenav">
             <header>
               <h1 className="sidenavtext">Bloc Chat</h1>
+              <User firebase={firebase} setUser={this.setUser.bind(this)} username={this.state.username} />
             </header>
             <Col md={4}>
               <aside className="sidenavtext">
